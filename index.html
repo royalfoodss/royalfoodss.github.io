@@ -283,6 +283,73 @@ h2 {
     color: #ddd;
 
 }
+
+/* Contact Section */
+
+.contact-container {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit,
+                                  minmax(220px, 1fr));
+
+    gap: 25px;
+
+}
+
+.contact-card {
+
+    background: #111;
+
+    border: 1px solid gold;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: white;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+
+}
+
+.contact-card:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow: 0 0 30px rgba(255,215,0,0.5);
+
+}
+
+.contact-card i {
+
+    font-size: 3rem;
+
+    color: gold;
+
+    margin-bottom: 15px;
+
+}
+
+.contact-card h3 {
+
+    color: gold;
+
+}
+
+.location {
+
+    text-align: center;
+
+    margin-top: 50px;
+
+    color: #ddd;
+
+}
     
 /* Footer */
 
@@ -335,6 +402,9 @@ footer {
 
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
 </head>
 
 <body>
@@ -345,11 +415,12 @@ footer {
         ROYAL FOODSS
     </div>
 
-    <ul>
-        <li><a href="#why">Why Us</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#about">About Us</a></li>
-    </ul>
+   <ul>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+</ul>
 
 </nav>
 
@@ -365,7 +436,7 @@ footer {
 
         <div class="text-section">
 
-            <h1>ROYAL FOODSS</h1>
+            <h1>ROYALFOODSS</h1>
 
             <h2>Quality Snacks Crafted with Care</h2>
 
@@ -494,10 +565,83 @@ footer {
     </div>
 
 </section>
+<section id="contact">
 
+    <h2>Contact Us</h2>
+
+    <div class="contact-container">
+
+        <a href="https://wa.me/917598486239"
+           target="_blank"
+           class="contact-card"
+           data-aos="zoom-in">
+
+            <i class="fab fa-whatsapp"></i>
+
+            <h3>WhatsApp</h3>
+
+            <p>Chat with us directly.</p>
+
+        </a>
+
+        <a href="https://www.instagram.com/royal_foodss?igsh=bWRjdTRxZDBjdDR2"   
+           target="_blank"
+           class="contact-card"
+           data-aos="zoom-in"
+           data-aos-delay="100">
+
+            <i class="fab fa-instagram"></i>
+
+            <h3>Instagram</h3>
+
+            <p>Follow our latest updates.</p>
+
+        </a>
+
+        <a href="https://www.facebook.com/share/17tPqMmktN/"
+           target="_blank"
+           class="contact-card"
+           data-aos="zoom-in"
+           data-aos-delay="200">
+
+            <i class="fab fa-facebook-f"></i>
+
+            <h3>Facebook</h3>
+
+            <p>Connect with Royal Foodss.</p>
+
+        </a>
+
+        <a href="https://www.linkedin.com/in/blessing-jetlin-g-s-a16752327"
+           target="_blank"
+           class="contact-card"
+           data-aos="zoom-in"
+           data-aos-delay="300">
+
+            <i class="fab fa-linkedin-in"></i>
+
+            <h3>LinkedIn</h3>
+
+            <p>Professional updates.</p>
+
+        </a>
+
+    </div>
+
+    <div class="location">
+
+        <p>📍 Kanyakumari, Tamil Nadu</p>
+
+        <p>✉ royalfoodss@gmail.com</p>
+
+    </div>
+
+</section>
 <footer>
 
-    <p>📍 Kanyakumari, Tamil Nadu</p>
+    <p>👑 Royal Foodss</p>
+
+    <p>Quality Snacks Crafted with Care</p>
 
     <p>© 2026 Royal Foodss. All rights reserved.</p>
 
