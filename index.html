@@ -359,42 +359,6 @@ footer {
     padding: 30px;
     color: white;
 }
-/* Royal Music Emblem */
-
-#soundToggle {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    left: auto;
-
-    width: 60px;
-    height: 60px;
-
-    border-radius: 50%;
-    border: 2px solid gold;
-
-    background: rgba(0, 0, 0, 0.8);
-
-    color: gold;
-
-    font-size: 28px;
-
-    cursor: pointer;
-
-    z-index: 9999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: all 0.3s ease;
-
-    box-shadow:
-        0 0 10px gold,
-        0 0 20px rgba(255,215,0,0.5);
-
-    animation: royalPulse 2.5s infinite;
-}
 
 #soundToggle:hover {
 
@@ -500,10 +464,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <audio id="kingVoice">
     <source src="kingvoice.mp3" type="audio/mpeg">
 </audio>
-
-<button id="soundToggle">
-    🎵
-</button>
 
 <nav>
 
@@ -754,7 +714,7 @@ AOS.init({
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </script>
 </script>
-    <script>
+<script>
 
 AOS.init({
     duration: 1200,
@@ -763,14 +723,10 @@ AOS.init({
 
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
-const toggle = document.getElementById("soundToggle");
 
-/* Set background music volume */
 music.volume = 0.25;
 
 let royalStarted = false;
-
-/* Start music + king voice on FIRST user interaction */
 
 function startRoyalExperience() {
 
@@ -788,86 +744,19 @@ function startRoyalExperience() {
 
 }
 
-/* Desktop mouse wheel */
-
+/* Desktop: mouse wheel */
 window.addEventListener(
     "wheel",
     startRoyalExperience,
     { once: true }
 );
 
-/* Mobile scroll */
-
+/* Mobile: touch scroll */
 window.addEventListener(
     "touchmove",
     startRoyalExperience,
     { once: true }
 );
-
-/* Mute / Unmute */
-
-toggle.addEventListener("click", function() {
-
-    music.muted = !music.muted;
-    voice.muted = !voice.muted;
-
-    toggle.innerHTML = music.muted ? "🔇" : "🎵";
-
-});
-
-/* Drag Button - Desktop */
-
-let isDragging = false;
-
-toggle.addEventListener("mousedown", function() {
-
-    isDragging = true;
-
-});
-
-document.addEventListener("mousemove", function(e) {
-
-    if (!isDragging) return;
-
-    toggle.style.left = e.clientX - 30 + "px";
-
-    toggle.style.top = e.clientY - 30 + "px";
-
-    toggle.style.right = "auto";
-
-});
-
-document.addEventListener("mouseup", function() {
-
-    isDragging = false;
-
-});
-
-/* Drag Button - Mobile */
-
-toggle.addEventListener("touchstart", function() {
-
-    isDragging = true;
-
-});
-
-document.addEventListener("touchmove", function(e) {
-
-    if (!isDragging) return;
-
-    toggle.style.left = e.touches[0].clientX - 30 + "px";
-
-    toggle.style.top = e.touches[0].clientY - 30 + "px";
-
-    toggle.style.right = "auto";
-
-});
-
-document.addEventListener("touchend", function() {
-
-    isDragging = false;
-
-});
 
 </script>
 </body>
