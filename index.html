@@ -14,8 +14,8 @@ body {
     background: #000;
     color: white;
     line-height: 1.6;
+    overflow: hidden;
 }
-
 /* Navigation Bar */
 
 nav {
@@ -351,7 +351,7 @@ h2 {
 
 }
     #royalEntrance {
-
+transition: opacity 0.8s ease;
     position: fixed;
 
     inset: 0;
@@ -540,6 +540,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </head>
 
 <body>
+
 <div id="royalEntrance">
 
     <img src="king.png" alt="Royal King" class="entrance-king">
@@ -807,73 +808,39 @@ AOS.init({
 });
 </script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-</script>
-</script>
+
+<script>
+
 <script>
 
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
-
-music.volume = 0.25;   /* 25% volume */
-
-let royalStarted = false;
-
-function startRoyalExperience() {
-
-    if (royalStarted) return;
-
-    royalStarted = true;
-
-    /* Background music (loops forever) */
-    music.play().catch(error => {
-        console.log("Music blocked:", error);
-    });
-
-    /* King voice (plays once) */
-    voice.play().catch(error => {
-        console.log("Voice blocked:", error);
-    });
-
-}
-
-/* Desktop click */
-window.addEventListener("mousedown", startRoyalExperience, { once: true });
-
-/* Mobile touch */
-window.addEventListener("touchstart", startRoyalExperience, { once: true });
-
-/* Keyboard interaction */
-window.addEventListener("keydown", startRoyalExperience, { once: true });
-
-/* Additional scroll triggers */
-window.addEventListener("wheel", startRoyalExperience, { once: true });
-
-window.addEventListener("scroll", startRoyalExperience, { once: true });
-
-window.addEventListener("touchmove", startRoyalExperience, { once: true });
-
-</script>
-
-    <script>
-
-const music = document.getElementById("backgroundMusic");
-
-const voice = document.getElementById("kingVoice");
-
 const entrance = document.getElementById("royalEntrance");
-
 const enterButton = document.getElementById("enterButton");
 
 music.volume = 0.25;
 
-enterButton.addEventListener("click", function() {
+enterButton.addEventListener("click", function () {
 
-    music.play();
+    /* Start both at the same time */
+    music.play().catch(err => console.log(err));
+    voice.play().catch(err => console.log(err));
 
-    voice.play();
+    /* Fade out the entrance screen */
+    entrance.style.opacity = "0";
 
-   entrance.remove();
+    setTimeout(function () {
+
+        entrance.remove();
+
+        /* Enable scrolling */
+        document.body.style.overflow = "auto";
+
+    }, 800);
+
 });
+
+</script>
 
 </script>
     
