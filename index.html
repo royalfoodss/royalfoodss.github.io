@@ -363,7 +363,7 @@ footer {
 
 #soundToggle {
     position: fixed;
-    top: 20px;
+    top: 100px;
     right: 20px;
 
     width: 60px;
@@ -492,11 +492,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </head>
 
 <body>
-    <audio id="backgroundMusic" autoplay loop>
+   <audio id="backgroundMusic" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="kingVoice" autoplay>
+<audio id="kingVoice">
     <source src="kingvoice.mp3" type="audio/mpeg">
 </audio>
 
@@ -778,25 +778,95 @@ window.addEventListener("touchstart", startRoyalExperience, { once: true });
 
 window.addEventListener("wheel", startRoyalExperience, { once: true });
 
+<script>
+
+const music = document.getElementById("backgroundMusic");
+const voice = document.getElementById("kingVoice");
+const toggle = document.getElementById("soundToggle");
+
+let royalStarted = false;
+
+/* First Scroll Starts Everything */
+
+function startRoyalExperience() {
+
+    if (royalStarted) return;
+
+    royalStarted = true;
+
+    music.volume = 0.25;
+
+    music.play();
+
+    voice.play();
+
+}
+
+window.addEventListener("wheel", startRoyalExperience, { once: true });
+
+window.addEventListener("touchmove", startRoyalExperience, { once: true });
+
+/* Mute / Unmute */
+
 toggle.addEventListener("click", function() {
+
+    music.muted = !music.muted;
+    voice.muted = !voice.muted;
 
     if (music.muted) {
 
-        music.muted = false;
-        voice.muted = false;
-
-        toggle.innerHTML = "🎵";
+        toggle.innerHTML = "🔇";
 
     } else {
 
-        music.muted = true;
-        voice.muted = true;
-
-        toggle.innerHTML = "🔇";
+        toggle.innerHTML = "🎵";
 
     }
 
 });
+
+
+
+let isDragging = false;
+
+toggle.addEventListener("mousedown", function() {
+    isDragging = true;
+});
+
+document.addEventListener("mousemove", function(e) {
+
+    if (!isDragging) return;
+
+    toggle.style.left = e.clientX - 30 + "px";
+    toggle.style.top = e.clientY - 30 + "px";
+
+});
+
+document.addEventListener("mouseup", function() {
+    isDragging = false;
+});
+
+/* Mobile Support */
+
+toggle.addEventListener("touchstart", function() {
+    isDragging = true;
+});
+
+document.addEventListener("touchmove", function(e) {
+
+    if (!isDragging) return;
+
+    toggle.style.left = e.touches[0].clientX - 30 + "px";
+    toggle.style.top = e.touches[0].clientY - 30 + "px";
+
+});
+
+document.addEventListener("touchend", function() {
+    isDragging = false;
+});
+    
+
+</script>
 </script>
 </body>
 </html>
