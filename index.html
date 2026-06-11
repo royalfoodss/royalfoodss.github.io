@@ -718,7 +718,7 @@ AOS.init({
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
 
-music.volume = 0.25;
+music.volume = 0.25;   /* 25% volume */
 
 let royalStarted = false;
 
@@ -728,25 +728,33 @@ function startRoyalExperience() {
 
     royalStarted = true;
 
-    /* Start both at same time */
+    /* Background music (loops forever) */
     music.play().catch(error => {
         console.log("Music blocked:", error);
     });
 
+    /* King voice (plays once) */
     voice.play().catch(error => {
         console.log("Voice blocked:", error);
     });
 
 }
 
-/* Desktop */
+/* Desktop click */
 window.addEventListener("mousedown", startRoyalExperience, { once: true });
 
-/* Mobile */
+/* Mobile touch */
 window.addEventListener("touchstart", startRoyalExperience, { once: true });
 
-/* Keyboard */
+/* Keyboard interaction */
 window.addEventListener("keydown", startRoyalExperience, { once: true });
+
+/* Additional scroll triggers */
+window.addEventListener("wheel", startRoyalExperience, { once: true });
+
+window.addEventListener("scroll", startRoyalExperience, { once: true });
+
+window.addEventListener("touchmove", startRoyalExperience, { once: true });
 
 </script>
 </body>
