@@ -734,29 +734,24 @@ function startRoyalExperience() {
 
     royalStarted = true;
 
-    music.play().catch(error => {
-        console.log("Music blocked:", error);
-    });
+    voice.play();
 
-    voice.play().catch(error => {
-        console.log("Voice blocked:", error);
-    });
+    voice.onended = function() {
+
+        music.play();
+
+    };
 
 }
 
-/* Desktop: mouse wheel */
-window.addEventListener(
-    "wheel",
-    startRoyalExperience,
-    { once: true }
-);
+/* Desktop */
+window.addEventListener("mousedown", startRoyalExperience, { once: true });
 
-/* Mobile: touch scroll */
-window.addEventListener(
-    "touchmove",
-    startRoyalExperience,
-    { once: true }
-);
+/* Mobile */
+window.addEventListener("touchstart", startRoyalExperience, { once: true });
+
+/* Keyboard users */
+window.addEventListener("keydown", startRoyalExperience, { once: true });
 
 </script>
 </body>
