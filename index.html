@@ -207,6 +207,83 @@ h2 {
     box-shadow: 0 0 30px rgba(255,215,0,0.4);
 
 }
+
+/* Team Section */
+
+.team-container {
+
+    display: flex;
+
+    gap: 40px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+}
+
+.team-card {
+
+    background: #111;
+
+    border: 1px solid gold;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    width: 420px;
+
+    transition: 0.3s;
+
+}
+
+.team-card:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow: 0 0 25px rgba(255,215,0,0.5);
+
+}
+
+.team-card img {
+
+    width: 180px;
+
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 4px solid gold;
+
+}
+
+.team-card h3 {
+
+    color: gold;
+
+    margin-top: 20px;
+
+}
+
+.team-card h4 {
+
+    color: white;
+
+    margin-bottom: 15px;
+
+}
+
+.team-card p {
+
+    color: #ddd;
+
+}
+    
 /* Footer */
 
 footer {
@@ -219,6 +296,12 @@ footer {
 /* Mobile */
 
 @media (max-width: 768px) {
+
+    .team-card {
+
+    width: 100%;
+
+}
     .product-card {
 
     flex-direction: column;
@@ -370,16 +453,45 @@ footer {
 
 <section id="about">
 
-    <h2>About Us</h2>
+    <h2>Meet the Team</h2>
 
-    <p style="text-align:center; color:#ddd; max-width:800px; margin:auto;">
+    <div class="team-container">
 
-        Royal Foodss, based in Kanyakumari, Tamil Nadu,
-        is dedicated to crafting delicious and high-quality snack products.
-        We strive to deliver consistent taste and maintain the highest standards
-        of quality for our customers.
+        <div class="team-card"
+             data-aos="fade-right">
 
-    </p>
+            <img src="founder.jpg"
+                 alt="Founder">
+
+            <h3>Founder</h3>
+
+            <h4>Your Name Here</h4>
+
+            <p>
+                Passionate about creating innovative snack experiences,
+                ensuring quality, and building Royal Foodss into a trusted brand.
+            </p>
+
+        </div>
+
+        <div class="team-card"
+             data-aos="fade-left">
+
+            <img src="cofounder.jpg"
+                 alt="Co-Founder">
+
+            <h3>Co-Founder</h3>
+
+            <h4>Co-Founder Name Here</h4>
+
+            <p>
+                Dedicated to operational excellence and maintaining the
+                highest standards of manufacturing and customer satisfaction.
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
