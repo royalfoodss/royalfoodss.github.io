@@ -703,23 +703,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 </footer>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
 <script>
-AOS.init({
-    duration: 1200,
-    once: true
-});
-</script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-</script>
-</script>
-<script>
-
-AOS.init({
-    duration: 1200,
-    once: true
-});
 
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
@@ -734,13 +718,14 @@ function startRoyalExperience() {
 
     royalStarted = true;
 
-    voice.play();
+    /* Start both at same time */
+    music.play().catch(error => {
+        console.log("Music blocked:", error);
+    });
 
-    voice.onended = function() {
-
-        music.play();
-
-    };
+    voice.play().catch(error => {
+        console.log("Voice blocked:", error);
+    });
 
 }
 
@@ -750,7 +735,7 @@ window.addEventListener("mousedown", startRoyalExperience, { once: true });
 /* Mobile */
 window.addEventListener("touchstart", startRoyalExperience, { once: true });
 
-/* Keyboard users */
+/* Keyboard */
 window.addEventListener("keydown", startRoyalExperience, { once: true });
 
 </script>
