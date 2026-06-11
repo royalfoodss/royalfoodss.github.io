@@ -365,6 +365,7 @@ footer {
     position: fixed;
     top: 100px;
     right: 20px;
+    left: auto;
 
     width: 60px;
     height: 60px;
@@ -750,43 +751,26 @@ AOS.init({
     once: true
 });
 </script>
-<script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+</script>
+</script>
+    <script>
 
-let started = false;
+AOS.init({
+    duration: 1200,
+    once: true
+});
 
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
 const toggle = document.getElementById("soundToggle");
 
+/* Set background music volume */
 music.volume = 0.25;
-
-function startRoyalExperience() {
-
-    if (started) return;
-
-    started = true;
-
-    music.play().catch(() => {});
-
-    voice.play().catch(() => {});
-
-}
-
-window.addEventListener("scroll", startRoyalExperience, { once: true });
-
-window.addEventListener("touchstart", startRoyalExperience, { once: true });
-
-window.addEventListener("wheel", startRoyalExperience, { once: true });
-
-<script>
-
-const music = document.getElementById("backgroundMusic");
-const voice = document.getElementById("kingVoice");
-const toggle = document.getElementById("soundToggle");
 
 let royalStarted = false;
 
-/* First Scroll Starts Everything */
+/* Start music + king voice on FIRST user interaction */
 
 function startRoyalExperience() {
 
@@ -794,17 +778,31 @@ function startRoyalExperience() {
 
     royalStarted = true;
 
-    music.volume = 0.25;
+    music.play().catch(error => {
+        console.log("Music blocked:", error);
+    });
 
-    music.play();
-
-    voice.play();
+    voice.play().catch(error => {
+        console.log("Voice blocked:", error);
+    });
 
 }
 
-window.addEventListener("wheel", startRoyalExperience, { once: true });
+/* Desktop mouse wheel */
 
-window.addEventListener("touchmove", startRoyalExperience, { once: true });
+window.addEventListener(
+    "wheel",
+    startRoyalExperience,
+    { once: true }
+);
+
+/* Mobile scroll */
+
+window.addEventListener(
+    "touchmove",
+    startRoyalExperience,
+    { once: true }
+);
 
 /* Mute / Unmute */
 
@@ -813,24 +811,18 @@ toggle.addEventListener("click", function() {
     music.muted = !music.muted;
     voice.muted = !voice.muted;
 
-    if (music.muted) {
-
-        toggle.innerHTML = "🔇";
-
-    } else {
-
-        toggle.innerHTML = "🎵";
-
-    }
+    toggle.innerHTML = music.muted ? "🔇" : "🎵";
 
 });
 
-
+/* Drag Button - Desktop */
 
 let isDragging = false;
 
 toggle.addEventListener("mousedown", function() {
+
     isDragging = true;
+
 });
 
 document.addEventListener("mousemove", function(e) {
@@ -838,18 +830,25 @@ document.addEventListener("mousemove", function(e) {
     if (!isDragging) return;
 
     toggle.style.left = e.clientX - 30 + "px";
+
     toggle.style.top = e.clientY - 30 + "px";
+
+    toggle.style.right = "auto";
 
 });
 
 document.addEventListener("mouseup", function() {
+
     isDragging = false;
+
 });
 
-/* Mobile Support */
+/* Drag Button - Mobile */
 
 toggle.addEventListener("touchstart", function() {
+
     isDragging = true;
+
 });
 
 document.addEventListener("touchmove", function(e) {
@@ -857,16 +856,19 @@ document.addEventListener("touchmove", function(e) {
     if (!isDragging) return;
 
     toggle.style.left = e.touches[0].clientX - 30 + "px";
+
     toggle.style.top = e.touches[0].clientY - 30 + "px";
+
+    toggle.style.right = "auto";
 
 });
 
 document.addEventListener("touchend", function() {
-    isDragging = false;
-});
-    
 
-</script>
+    isDragging = false;
+
+});
+
 </script>
 </body>
 </html>
