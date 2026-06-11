@@ -359,6 +359,23 @@ footer {
     padding: 30px;
     color: white;
 }
+    #soundToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: gold;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 9999;
+}
+
+#soundToggle:hover {
+    transform: scale(1.05);
+}
 
 /* Mobile */
 
@@ -408,6 +425,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </head>
 
 <body>
+    <audio id="backgroundMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="kingVoice">
+    <source src="kingvoice.mp3" type="audio/mpeg">
+</audio>
+
+<button id="soundToggle">
+    👑 Sound ON
+</button>
 
 <nav>
 
@@ -655,6 +683,54 @@ AOS.init({
     once: true
 });
 </script>
+<script>
 
+let started = false;
+
+const music = document.getElementById("backgroundMusic");
+const voice = document.getElementById("kingVoice");
+const toggle = document.getElementById("soundToggle");
+
+music.volume = 0.25;
+
+function startRoyalExperience() {
+
+    if (started) return;
+
+    started = true;
+
+    music.play().catch(() => {});
+
+    voice.play().catch(() => {});
+
+}
+
+window.addEventListener("scroll", startRoyalExperience, { once: true });
+
+window.addEventListener("touchstart", startRoyalExperience, { once: true });
+
+window.addEventListener("wheel", startRoyalExperience, { once: true });
+
+toggle.addEventListener("click", function() {
+
+    if (music.paused) {
+
+        music.play();
+
+        toggle.innerHTML = "👑 Sound ON";
+
+    } else {
+
+        music.pause();
+
+        voice.pause();
+
+        toggle.innerHTML = "🔇 Sound OFF";
+
+    }
+
+});
+
+</script>
 </body>
 </html>
