@@ -138,12 +138,13 @@ h2 {
     border-radius: 15px;
     padding: 25px;
     text-align: center;
+    transition: 0.3s;
 }
 
-.card h3 {
-    color: gold;
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
 }
-
 /* Footer */
 
 footer {
@@ -180,8 +181,17 @@ footer {
 
 </style>
 
-</head>
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
+</head>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+AOS.init({
+    duration: 1200,
+    once: true
+});
+</script>
 <body>
 
 <nav>
@@ -235,25 +245,25 @@ footer {
 
     <div class="features">
 
-        <div class="card">
-            <h3>Quality Ingredients</h3>
-            <p>Carefully selected ingredients for exceptional taste.</p>
-        </div>
+       <div class="card" data-aos="fade-up" data-aos-delay="100">
+    <h3>Quality Ingredients</h3>
+    <p>Carefully selected ingredients for exceptional taste.</p>
+</div>
 
-        <div class="card">
-            <h3>Hygienic Manufacturing</h3>
-            <p>Prepared with high standards of cleanliness and safety.</p>
-        </div>
+<div class="card" data-aos="fade-up" data-aos-delay="300">
+    <h3>Hygienic Manufacturing</h3>
+    <p>Prepared with high standards of cleanliness and safety.</p>
+</div>
 
-        <div class="card">
-            <h3>Delicious Taste</h3>
-            <p>Snacks crafted to satisfy every craving.</p>
-        </div>
+<div class="card" data-aos="fade-up" data-aos-delay="500">
+    <h3>Delicious Taste</h3>
+    <p>Snacks crafted to satisfy every craving.</p>
+</div>
 
-        <div class="card">
-            <h3>Customer Satisfaction</h3>
-            <p>Committed to delivering products our customers love.</p>
-        </div>
+<div class="card" data-aos="fade-up" data-aos-delay="700">
+    <h3>Customer Satisfaction</h3>
+    <p>Committed to delivering products our customers love.</p>
+</div>
 
     </div>
 
