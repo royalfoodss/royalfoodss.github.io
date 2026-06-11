@@ -427,6 +427,9 @@ transition: opacity 0.8s ease;
     animation: royalPulse 2s infinite;
 
 }
+    #royalEntrance.hidden {
+    display: none !important;
+}
 
 #enterButton:hover {
 
@@ -822,18 +825,14 @@ music.volume = 0.25;
 
 enterButton.addEventListener("click", function () {
 
-    /* Start both at the same time */
-    music.play().catch(err => console.log(err));
-    voice.play().catch(err => console.log(err));
+    music.play();
+    voice.play();
 
-alert("Button Clicked");
+    entrance.classList.add("hidden");
 
-entrance.style.display = "none";
-
-document.body.style.overflow = "auto";
+    document.body.style.overflow = "auto";
 
 });
-
 </script>
 
 </script>
