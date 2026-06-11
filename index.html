@@ -359,18 +359,85 @@ footer {
     padding: 30px;
     color: white;
 }
-    #soundToggle {
+/* Royal Music Emblem */
+
+#soundToggle {
     position: fixed;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
-    background: gold;
-    color: black;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 30px;
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+    border: 2px solid gold;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    color: gold;
+
+    font-size: 28px;
+
     cursor: pointer;
-    font-weight: bold;
+
     z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.3s ease;
+
+    box-shadow:
+        0 0 10px gold,
+        0 0 20px rgba(255,215,0,0.5);
+
+    animation: royalPulse 2.5s infinite;
+}
+
+#soundToggle:hover {
+
+    transform: scale(1.1);
+
+    box-shadow:
+        0 0 15px gold,
+        0 0 30px gold,
+        0 0 45px rgba(255,215,0,0.8);
+
+}
+
+@keyframes royalPulse {
+
+    0% {
+
+        transform: scale(1);
+
+        box-shadow:
+            0 0 10px gold,
+            0 0 20px rgba(255,215,0,0.5);
+
+    }
+
+    50% {
+
+        transform: scale(1.08);
+
+        box-shadow:
+            0 0 20px gold,
+            0 0 40px rgba(255,215,0,0.8);
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+        box-shadow:
+            0 0 10px gold,
+            0 0 20px rgba(255,215,0,0.5);
+
+    }
+
 }
 
 #soundToggle:hover {
@@ -425,16 +492,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </head>
 
 <body>
-    <audio id="backgroundMusic" loop>
+    <audio id="backgroundMusic" autoplay loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="kingVoice">
+<audio id="kingVoice" autoplay>
     <source src="kingvoice.mp3" type="audio/mpeg">
 </audio>
 
 <button id="soundToggle">
-    👑 Sound ON
+    🎵
 </button>
 
 <nav>
@@ -713,24 +780,23 @@ window.addEventListener("wheel", startRoyalExperience, { once: true });
 
 toggle.addEventListener("click", function() {
 
-    if (music.paused) {
+    if (music.muted) {
 
-        music.play();
+        music.muted = false;
+        voice.muted = false;
 
-        toggle.innerHTML = "👑 Sound ON";
+        toggle.innerHTML = "🎵";
 
     } else {
 
-        music.pause();
+        music.muted = true;
+        voice.muted = true;
 
-        voice.pause();
-
-        toggle.innerHTML = "🔇 Sound OFF";
+        toggle.innerHTML = "🔇";
 
     }
 
 });
-
 </script>
 </body>
 </html>
