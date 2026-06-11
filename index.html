@@ -148,6 +148,65 @@ h2 {
 .card h3 {
     color: gold;
 }
+    /* Product Showcase */
+
+.product-showcase {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 50px;
+
+}
+
+.product-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 40px;
+
+    background: #111;
+
+    border: 1px solid gold;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+}
+
+.product-card img {
+
+    width: 280px;
+
+    max-width: 100%;
+
+}
+
+.product-card h3 {
+
+    color: gold;
+
+    font-size: 2rem;
+
+}
+
+.product-card p {
+
+    color: #ddd;
+
+    font-size: 18px;
+
+}
+
+.product-card:hover {
+
+    box-shadow: 0 0 30px rgba(255,215,0,0.4);
+
+}
 /* Footer */
 
 footer {
@@ -160,6 +219,13 @@ footer {
 /* Mobile */
 
 @media (max-width: 768px) {
+    .product-card {
+
+    flex-direction: column;
+
+    text-align: center;
+
+}
 
     nav {
         flex-direction: column;
@@ -221,8 +287,7 @@ footer {
             <h2>Quality Snacks Crafted with Care</h2>
 
             <p>
-                Premium snack products made with a commitment
-                to taste, quality, and customer satisfaction.
+                Premium snack products
             </p>
 
             <a class="experience-btn" href="#why">
@@ -265,22 +330,38 @@ footer {
 
 </section>
 
-<section id="products">
+    <section id="products">
 
     <h2>Our Products</h2>
 
-    <div class="features">
+    <div class="product-showcase">
 
-        <div class="card">
+        <div class="product-card"
+             data-aos="fade-left">
+
+            <img src="bitterslice.png"
+                 alt="Bitterslice">
+
             <h3>Bitterslice</h3>
-            <p>Premium snack product.</p>
-            <p><strong>Product image coming soon.</strong></p>
+
+            <p>
+                Crispy. Savory. Totally Unexpected.
+            </p>
+
         </div>
 
-        <div class="card">
+        <div class="product-card"
+             data-aos="fade-right">
+
+            <img src="bnana.png"
+                 alt="B-Nana Crunch">
+
             <h3>B-Nana Crunch</h3>
-            <p>Premium snack product.</p>
-            <p><strong>Product image coming soon.</strong></p>
+
+            <p>
+                Naturally Sweet. Irresistibly Crunchy.
+            </p>
+
         </div>
 
     </div>
