@@ -826,17 +826,11 @@ enterButton.addEventListener("click", function () {
     music.play().catch(err => console.log(err));
     voice.play().catch(err => console.log(err));
 
-    /* Fade out the entrance screen */
-    entrance.style.opacity = "0";
+alert("Button Clicked");
 
-    setTimeout(function () {
+entrance.style.display = "none";
 
-        entrance.remove();
-
-        /* Enable scrolling */
-        document.body.style.overflow = "auto";
-
-    }, 800);
+document.body.style.overflow = "auto";
 
 });
 
