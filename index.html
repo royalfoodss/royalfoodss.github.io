@@ -11,9 +11,12 @@
     box-sizing: border-box;
 }
 
+
 html, body {
+    overflow: hidden;
     overflow-x: hidden;
     width: 100%;
+    height: 100%;
 }
 body {
     margin: 0;
@@ -77,7 +80,7 @@ nav a {
     flex-wrap: wrap;
 }
     .king-image {
-    transform: translateX(-50px);
+    transform: translateX(-60px);
 }
 
 .king-image {
@@ -87,7 +90,7 @@ nav a {
 }
 .text-section {
     max-width: 500px;
-    transform: translateX(-100px);
+    transform: translateX(-120px);
     text-align: center;
 }
 
@@ -362,6 +365,11 @@ h2 {
     color: #ddd;
 
 }
+
+    #royalEntrance {
+    touch-action: none;
+}
+    
   #royalEntrance {
     transition: opacity 0.8s ease;
 
@@ -894,7 +902,8 @@ enterButton.addEventListener("click", function () {
 
     entrance.classList.add("hidden");
 
-    document.body.style.overflow = "auto";
+   document.documentElement.style.overflow = "auto";
+document.body.style.overflow = "auto";
 
     window.scrollTo(0, 0);
 
