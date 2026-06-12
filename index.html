@@ -832,6 +832,25 @@ enterButton.addEventListener("click", function () {
 
 });
 </script>
+    <script>
+
+/* Stop music when user leaves the page */
+
+document.addEventListener("visibilitychange", function() {
+
+    if (document.hidden) {
+
+        music.pause();
+
+    } else {
+
+        music.play().catch(() => {});
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>
