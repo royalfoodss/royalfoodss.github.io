@@ -79,7 +79,7 @@ nav a {
 
 .king-image {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     height: auto;
 }
 .text-section {
@@ -104,20 +104,25 @@ nav a {
     font-size: 18px;
 }
 
-.experience-btn {
+.scroll-arrow {
     display: inline-block;
-    margin-top: 25px;
-    background: gold;
-    color: black;
+    margin-top: 40px;
+
+    font-size: 4rem;
+    color: gold;
+
     text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: 0.3s;
+
+    text-shadow:
+        0 0 10px gold,
+        0 0 20px gold,
+        0 0 40px rgba(255,215,0,0.7);
+
+    animation: arrowDance 1.5s infinite ease-in-out;
 }
 
-.experience-btn:hover {
-    transform: scale(1.05);
+.scroll-arrow:hover {
+    transform: scale(1.2);
 }
 
 /* General Sections */
@@ -497,6 +502,21 @@ footer {
     }
 
 }
+    @keyframes arrowDance {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
 
 #soundToggle:hover {
     transform: scale(1.05);
@@ -607,13 +627,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
             <h2>Quality Snacks Crafted with Care</h2>
 
-            <p>
-                Premium snack products
-            </p>
 
-            <a class="experience-btn" href="#why">
-                Enter Royal Experience
-            </a>
+            <a href="#why" class="scroll-arrow">
+                ▼
+                </a>
 
         </div>
 
