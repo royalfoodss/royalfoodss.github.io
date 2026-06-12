@@ -7,7 +7,14 @@
 <title>Royal Foodss</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -71,10 +78,10 @@ nav a {
 }
 
 .king-image {
-    width: 450px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
 }
-
 .text-section {
     max-width: 500px;
 }
@@ -161,23 +168,15 @@ h2 {
 }
 
 .product-card {
-
     display: flex;
-
     align-items: center;
-
     gap: 40px;
-
     background: #111;
-
     border: 1px solid gold;
-
     border-radius: 20px;
-
     padding: 30px;
-
+    overflow: hidden;
 }
-
 .product-card img {
 
     width: 280px;
@@ -436,6 +435,11 @@ transition: opacity 0.8s ease;
     transform: scale(1.05);
 
 }
+
+    img {
+    max-width: 100%;
+    height: auto;
+}
     
 /* Footer */
 
@@ -499,22 +503,10 @@ footer {
 
 @media (max-width: 768px) {
 
-    .team-card {
-
-    width: 100%;
-
-}
-    .product-card {
-
-    flex-direction: column;
-
-    text-align: center;
-
-}
-
     nav {
         flex-direction: column;
         gap: 15px;
+        padding: 15px 20px;
     }
 
     nav ul {
@@ -529,6 +521,15 @@ footer {
 
     .hero-content {
         gap: 40px;
+    }
+
+    .product-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .team-card {
+        width: 100%;
     }
 
 }
