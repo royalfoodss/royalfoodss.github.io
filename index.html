@@ -16,8 +16,9 @@
 html {
     scrollbar-width: none;      /* Firefox */
     -ms-overflow-style: none;   /* IE and Edge */
-}
 
+    scroll-behavior: smooth;
+}
 html::-webkit-scrollbar {
     display: none;              /* Chrome, Safari, Opera */
 }
@@ -944,9 +945,9 @@ gsap.from(".product-left", {
     opacity: 0,
     scrollTrigger: {
         trigger: ".product-left",
-        start: "top 90%",
-        end: "top 20%",
-        scrub: 2
+        start: "top 80%",
+        end: "top 30%",
+        scrub: true
     }
 });
 
@@ -955,9 +956,9 @@ gsap.from(".product-right", {
     opacity: 0,
     scrollTrigger: {
         trigger: ".product-right",
-        start: "top 90%",
-        end: "top 20%",
-        scrub: 2
+        start: "top 80%",
+        end: "top 30%",
+        scrub: true
     }
 });
 
@@ -967,8 +968,8 @@ gsap.from(".team-right", {
     opacity: 0,
     scrollTrigger: {
         trigger: ".team-right",
-        start: "top 90%",
-        end: "top 20%",
+        start: "top 80%",
+        end: "top 30%",
         scrub: 2
     }
 });
@@ -978,8 +979,8 @@ gsap.from(".team-left", {
     opacity: 0,
     scrollTrigger: {
         trigger: ".team-left",
-        start: "top 90%",
-        end: "top 20%",
+        start: "top 80%",
+        end: "top 30%",
         scrub: 2
     }
 });
@@ -993,8 +994,8 @@ gsap.utils.toArray(".why-card").forEach((card) => {
 
         scrollTrigger: {
             trigger: card,
-            start: "top 90%",
-            end: "top 20%",
+            start: "top 80%",
+            end: "top 30%",
             scrub: 2
         }
     });
@@ -1010,8 +1011,8 @@ gsap.utils.toArray(".contact-item").forEach((card) => {
 
         scrollTrigger: {
             trigger: card,
-            start: "top 90%",
-            end: "top 20%",
+            start: "top 80%",
+            end: "top 30%",
             scrub: 2
         }
     });
