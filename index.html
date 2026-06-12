@@ -844,23 +844,18 @@ window.addEventListener("beforeunload", function () {
 });
 enterButton.addEventListener("click", function () {
 
-    /* Prevent multiple clicks */
     enterButton.disabled = true;
 
-    /* Start background music */
     music.play().catch(console.error);
 
-    /* Play king voice ONLY if it hasn't already played */
     if (!kingVoiceCompleted && voice.currentTime === 0) {
-    voice.play();
-}
-    /* Hide popup */
+        voice.play().catch(console.error);
+    }
+
     entrance.classList.add("hidden");
 
-    /* Enable scrolling */
     document.body.style.overflow = "auto";
 
-    /* Start from hero section */
     window.scrollTo(0, 0);
 
 });
@@ -870,8 +865,7 @@ enterButton.addEventListener("click", function () {
 
         music.pause();
 
-        /* Pause king voice only if it has not finished */
-        if (!kingVoiceCompleted) {
+        if (!kingVoiceCompleted && !voice.paused) {
             voice.pause();
         }
 
@@ -879,8 +873,11 @@ enterButton.addEventListener("click", function () {
 
         music.play().catch(() => {});
 
-        /* Resume king voice only if it was interrupted */
-        if (!kingVoiceCompleted && voice.currentTime > 0) {
+        if (
+            !kingVoiceCompleted &&
+            voice.currentTime > 0 &&
+            voice.paused
+        ) {
             voice.play().catch(() => {});
         }
 
@@ -888,27 +885,7 @@ enterButton.addEventListener("click", function () {
 
 });
 </script>
-    <script>
 
-/* Stop music when user leaves the page */
-
-document.addEventListener("visibilitychange", function() {
-
-    if (document.hidden) {
-
-        music.pause();
-         voice.pause();
-
-    } else {
-
-        music.play().catch(() => {});
-        voice.play().catch(() => {});
-
-    }
-
-});
-
-</script>
 
 </body>
 </html>
