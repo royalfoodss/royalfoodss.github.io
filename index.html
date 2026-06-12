@@ -565,16 +565,33 @@ footer {
     transform: none;
 }
 
-    nav {
-        flex-direction: column;
-        gap: 15px;
+    {
+
+    .text-section h2,
+    .scroll-arrow {
+        left: 0;
+    }
+
+}
+        nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding: 15px 20px;
     }
 
     nav ul {
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 20px;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+    }
+
+    nav .logo {
+        font-size: 22px;
+    }
+
+    nav a {
+        font-size: 14px;
     }
 
     .text-section h1 {
