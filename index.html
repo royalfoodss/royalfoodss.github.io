@@ -935,98 +935,84 @@ document.body.classList.remove("lock-scroll");
     }
 
 });
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from(".product-left", {
+    
+gsap.registerPlugin(ScrollTrigger);
+
+/* Products */
+gsap.from(".product-left", {
     x: -150,
     opacity: 0,
-    duration: 1.2,
     scrollTrigger: {
         trigger: ".product-left",
-        start: "top 80%",
-        toggleActions: "play reverse play reverse"
+        start: "top 85%",
+        end: "top 30%",
+        scrub: 1
     }
 });
 
-gsap.fromTo(".product-left",
-
-    {
-        x: -150,
-        opacity: 0
-    },
-
-    {
-        x: 0,
-        opacity: 1,
-        duration: 1.2,
-
-        scrollTrigger: {
-            trigger: ".product-left",
-            start: "top 80%",
-            end: "top 20%",
-
-            onLeaveBack: () => {
-                gsap.to(".product-left", {
-                    x: 150,
-                    opacity: 0,
-                    duration: 1
-                });
-            },
-
-            onEnter: () => {
-                gsap.to(".product-left", {
-                    x: 0,
-                    opacity: 1,
-                    duration: 1
-                });
-            }
-        }
+gsap.from(".product-right", {
+    x: 150,
+    opacity: 0,
+    scrollTrigger: {
+        trigger: ".product-right",
+        start: "top 85%",
+        end: "top 30%",
+        scrub: 1
     }
-);
-    gsap.from(".team-right", {
+});
+
+/* Team */
+gsap.from(".team-right", {
     x: -150,
     opacity: 0,
-    duration: 1.2,
     scrollTrigger: {
         trigger: ".team-right",
-        start: "top 80%",
-        toggleActions: "play reverse play reverse"
+        start: "top 85%",
+        end: "top 30%",
+        scrub: 1
     }
 });
 
 gsap.from(".team-left", {
     x: 150,
     opacity: 0,
-    duration: 1.2,
     scrollTrigger: {
         trigger: ".team-left",
-        start: "top 80%",
-        toggleActions: "play reverse play reverse"
+        start: "top 85%",
+        end: "top 30%",
+        scrub: 1
     }
 });
-    gsap.utils.toArray(".why-card").forEach((card) => {
+
+/* Why Us */
+gsap.utils.toArray(".why-card").forEach((card) => {
 
     gsap.from(card, {
-        y: 80,
+        y: 100,
         opacity: 0,
-        duration: 1,
+
         scrollTrigger: {
             trigger: card,
-            start: "top 85%",
-            toggleActions: "play reverse play reverse"
+            start: "top 90%",
+            end: "top 40%",
+            scrub: 1
         }
     });
 
 });
-    gsap.utils.toArray(".contact-item").forEach((card) => {
+
+/* Contact */
+gsap.utils.toArray(".contact-item").forEach((card) => {
 
     gsap.from(card, {
         scale: 0.7,
         opacity: 0,
-        duration: 0.8,
+
         scrollTrigger: {
             trigger: card,
-            start: "top 85%",
-            toggleActions: "play reverse play reverse"
+            start: "top 90%",
+            end: "top 40%",
+            scrub: 1
         }
     });
 
