@@ -681,8 +681,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     <div class="product-showcase">
 
-        <div class="product-card"
-             data-aos="fade-left">
+        <div class="product-card product-left">
 
             <img src="bitterslice.png"
                  alt="Bitterslice">
@@ -695,8 +694,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         </div>
 
-        <div class="product-card"
-             data-aos="fade-right">
+     <div class="product-card product-right">
 
             <img src="bnana.png"
                  alt="B-Nana Crunch">
@@ -719,22 +717,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     <div class="features">
 
-       <div class="card" data-aos="fade-up" data-aos-delay="100">
+    <div class="card why-card">
     <h3>Quality Ingredients</h3>
     <p>Carefully selected ingredients for exceptional taste.</p>
 </div>
 
-<div class="card" data-aos="fade-up" data-aos-delay="300">
+<div class="card why-card">
     <h3>Hygienic Manufacturing</h3>
     <p>Prepared with high standards of cleanliness and safety.</p>
 </div>
 
-<div class="card" data-aos="fade-up" data-aos-delay="500">
+<div class="card why-card">
     <h3>Delicious Taste</h3>
     <p>Snacks crafted to satisfy every craving.</p>
 </div>
 
-<div class="card" data-aos="fade-up" data-aos-delay="700">
+<div class="card why-card">
     <h3>Customer Satisfaction</h3>
     <p>Committed to delivering products our customers love.</p>
 </div>
@@ -749,8 +747,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     <div class="team-container">
 
-        <div class="team-card"
-             data-aos="fade-right">
+  <div class="team-card team-right">
 
             <img src="founder.png"
                  alt="Founder">
@@ -765,9 +762,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             </p>
 
         </div>
-
-        <div class="team-card"
-             data-aos="fade-left">
+<div class="team-card team-left">
 
             <img src="cofounder.jpeg"
                  alt="Co-Founder">
@@ -794,8 +789,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <a href="https://wa.me/917598486239"
            target="_blank"
-           class="contact-card"
-           data-aos="zoom-in">
+          class="contact-card contact-item">
 
             <i class="fab fa-whatsapp"></i>
 
@@ -807,9 +801,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <a href="https://www.instagram.com/royal_foodss?igsh=bWRjdTRxZDBjdDR2"   
            target="_blank"
-           class="contact-card"
-           data-aos="zoom-in"
-           data-aos-delay="100">
+           class="contact-card contact-item">
+          
 
             <i class="fab fa-instagram"></i>
 
@@ -821,9 +814,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <a href="https://www.facebook.com/share/17tPqMmktN/"
            target="_blank"
-           class="contact-card"
-           data-aos="zoom-in"
-           data-aos-delay="200">
+          class="contact-card contact-item">
 
             <i class="fab fa-facebook-f"></i>
 
@@ -835,9 +826,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <a href="https://www.linkedin.com/in/blessing-jetlin-g-s-a16752327"
            target="_blank"
-           class="contact-card"
-           data-aos="zoom-in"
-           data-aos-delay="300">
+           class="contact-card contact-item">
 
             <i class="fab fa-linkedin-in"></i>
 
@@ -869,13 +858,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </footer>
 
 
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
 
 <script>
-AOS.init({
-    duration: 1200,
-    once: false
-});
 
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
@@ -946,6 +933,77 @@ document.body.classList.remove("lock-scroll");
         }
 
     }
+
+});
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from(".product-left", {
+    x: -150,
+    opacity: 0,
+    duration: 1.2,
+    scrollTrigger: {
+        trigger: ".product-left",
+        start: "top 80%",
+        toggleActions: "play reverse play reverse"
+    }
+});
+
+gsap.from(".product-right", {
+    x: 150,
+    opacity: 0,
+    duration: 1.2,
+    scrollTrigger: {
+        trigger: ".product-right",
+        start: "top 80%",
+        toggleActions: "play reverse play reverse"
+    }
+});
+    gsap.from(".team-right", {
+    x: -150,
+    opacity: 0,
+    duration: 1.2,
+    scrollTrigger: {
+        trigger: ".team-right",
+        start: "top 80%",
+        toggleActions: "play reverse play reverse"
+    }
+});
+
+gsap.from(".team-left", {
+    x: 150,
+    opacity: 0,
+    duration: 1.2,
+    scrollTrigger: {
+        trigger: ".team-left",
+        start: "top 80%",
+        toggleActions: "play reverse play reverse"
+    }
+});
+    gsap.utils.toArray(".why-card").forEach((card) => {
+
+    gsap.from(card, {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play reverse play reverse"
+        }
+    });
+
+});
+    gsap.utils.toArray(".contact-item").forEach((card) => {
+
+    gsap.from(card, {
+        scale: 0.7,
+        opacity: 0,
+        duration: 0.8,
+        scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play reverse play reverse"
+        }
+    });
 
 });
 </script>
