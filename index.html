@@ -13,10 +13,13 @@
 
 
 html, body {
-    overflow: hidden;
     overflow-x: hidden;
     width: 100%;
-    height: 100%;
+}
+
+body.lock-scroll {
+    overflow: hidden;
+    height: 100vh;
 }
 body {
     margin: 0;
@@ -592,7 +595,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     
 </head>
 
-<body>
+<body class="lock-scroll">
 
 <div id="royalEntrance">
 
@@ -900,8 +903,7 @@ enterButton.addEventListener("click", function () {
 
     entrance.classList.add("hidden");
 
-   document.documentElement.style.overflow = "auto";
-document.body.style.overflow = "auto";
+document.body.classList.remove("lock-scroll");
 
     window.scrollTo(0, 0);
 
