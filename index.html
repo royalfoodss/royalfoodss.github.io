@@ -73,8 +73,11 @@ nav a {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 80px;
+    gap: 40px;
     flex-wrap: wrap;
+}
+    .king-image {
+    transform: translateX(-40px);
 }
 
 .king-image {
@@ -84,6 +87,8 @@ nav a {
 }
 .text-section {
     max-width: 500px;
+    transform: translateX(-80px);
+    text-align: center;
 }
 
 .text-section h1 {
@@ -105,26 +110,28 @@ nav a {
 }
 
 .scroll-arrow {
-    display: inline-block;
-    margin-top: 40px;
+    display: block;
 
-    font-size: 4rem;
+    margin-top: 25px;
+
+    font-size: 2.5rem;
+
     color: gold;
 
     text-decoration: none;
 
+    text-align: center;
+
     text-shadow:
-        0 0 10px gold,
-        0 0 20px gold,
-        0 0 40px rgba(255,215,0,0.7);
+        0 0 8px gold,
+        0 0 16px gold;
 
     animation: arrowDance 1.5s infinite ease-in-out;
 }
 
 .scroll-arrow:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
-
 /* General Sections */
 
 section {
@@ -525,6 +532,11 @@ footer {
 /* Mobile */
 
 @media (max-width: 768px) {
+
+    .king-image,
+.text-section {
+    transform: none;
+}
 
     nav {
         flex-direction: column;
