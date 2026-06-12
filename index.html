@@ -841,10 +841,12 @@ document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
 
         music.pause();
+         voice.pause();
 
     } else {
 
         music.play().catch(() => {});
+        voice.play().catch(() => {});
 
     }
 
