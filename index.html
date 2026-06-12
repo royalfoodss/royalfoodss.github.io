@@ -805,8 +805,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </footer>
 
 
-
-
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
@@ -819,16 +817,25 @@ const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
 const entrance = document.getElementById("royalEntrance");
 const enterButton = document.getElementById("enterButton");
-
+    
 music.volume = 0.25;
-
+window.history.scrollRestoration = "manual";
 enterButton.addEventListener("click", function () {
 
+    /* Start audio */
     music.play();
     voice.play();
 
+    /* Always start from Hero section */
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+    /* Hide popup */
     entrance.classList.add("hidden");
 
+    /* Enable scrolling */
     document.body.style.overflow = "auto";
 
 });
