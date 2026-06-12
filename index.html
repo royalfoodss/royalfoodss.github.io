@@ -107,7 +107,7 @@ nav a {
 }
 .text-section {
     max-width: 500px;
-    transform: translateX(-80px);
+    transform: translateX(-20px);
     text-align: center;
 }
 
@@ -563,14 +563,19 @@ footer {
 
 @media (max-width: 768px) {
 
-    .king-image,
-    .text-section {
-        transform: none;
-    }
+    .king-image {
+    transform: none;
+}
 
+.text-section {
+    transform: translateY(-30px);
+}
     .text-section h2,
     .scroll-arrow {
         left: 0;
+    }
+ .text-section {
+        transform: translateY(-30px);
     }
 
     nav {
