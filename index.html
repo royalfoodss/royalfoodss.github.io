@@ -815,28 +815,72 @@ AOS.init({
 
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
+
 const entrance = document.getElementById("royalEntrance");
 const enterButton = document.getElementById("enterButton");
-    
+
 music.volume = 0.25;
+
 window.history.scrollRestoration = "manual";
+
+window.addEventListener("pageshow", function () {
+    window.scrollTo(0, 0);
+});
+window.addEventListener("beforeunload", function () {
+
+    music.pause();
+    music.currentTime = 0;
+
+    voice.pause();
+    voice.currentTime = 0;
+
+});
 enterButton.addEventListener("click", function () {
 
-    /* Start audio */
-    music.play();
-    voice.play();
+    /* Prevent multiple clicks */
+    enterButton.disabled = true;
 
-    /* Always start from Hero section */
-    window.scrollTo({
-        top: 0,
-        behavior: "instant"
-    });
+    /* Start background music */
+    music.play().catch(console.error);
+
+    /* Play king voice ONLY if it hasn't already played */
+    if (voice.currentTime === 0 && voice.paused) {
+        voice.play().catch(console.error);
+    }
 
     /* Hide popup */
     entrance.classList.add("hidden");
 
     /* Enable scrolling */
     document.body.style.overflow = "auto";
+
+    /* Start from hero section */
+    window.scrollTo(0, 0);
+
+});
+    document.addEventListener("visibilitychange", function () {
+
+    if (document.hidden) {
+
+        /* User left the tab */
+
+        music.pause();
+
+        if (!voice.ended) {
+            voice.pause();
+        }
+
+    } else {
+
+        /* User returned */
+
+        music.play().catch(() => {});
+
+        if (!voice.ended && voice.currentTime > 0) {
+            voice.play().catch(() => {});
+        }
+
+    }
 
 });
 </script>
