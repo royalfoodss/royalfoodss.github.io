@@ -815,7 +815,7 @@ AOS.init({
 
 const music = document.getElementById("backgroundMusic");
 const voice = document.getElementById("kingVoice");
-
+let kingVoiceCompleted = false;
 const entrance = document.getElementById("royalEntrance");
 const enterButton = document.getElementById("enterButton");
 
@@ -825,7 +825,12 @@ window.history.scrollRestoration = "manual";
 
 window.addEventListener("pageshow", function () {
     window.scrollTo(0, 0);
+    
 });
+voice.addEventListener("ended", function () {
+    kingVoiceCompleted = true;
+});
+    
 window.addEventListener("beforeunload", function () {
 
     music.pause();
@@ -833,6 +838,8 @@ window.addEventListener("beforeunload", function () {
 
     voice.pause();
     voice.currentTime = 0;
+
+    kingVoiceCompleted = false;
 
 });
 enterButton.addEventListener("click", function () {
@@ -844,10 +851,9 @@ enterButton.addEventListener("click", function () {
     music.play().catch(console.error);
 
     /* Play king voice ONLY if it hasn't already played */
-    if (voice.currentTime === 0 && voice.paused) {
-        voice.play().catch(console.error);
-    }
-
+    if (!kingVoiceCompleted && voice.currentTime === 0) {
+    voice.play();
+}
     /* Hide popup */
     entrance.classList.add("hidden");
 
@@ -858,25 +864,23 @@ enterButton.addEventListener("click", function () {
     window.scrollTo(0, 0);
 
 });
-    document.addEventListener("visibilitychange", function () {
+   document.addEventListener("visibilitychange", function () {
 
     if (document.hidden) {
 
-        /* User left the tab */
-
         music.pause();
 
-        if (!voice.ended) {
+        /* Pause king voice only if it has not finished */
+        if (!kingVoiceCompleted) {
             voice.pause();
         }
 
     } else {
 
-        /* User returned */
-
         music.play().catch(() => {});
 
-        if (!voice.ended && voice.currentTime > 0) {
+        /* Resume king voice only if it was interrupted */
+        if (!kingVoiceCompleted && voice.currentTime > 0) {
             voice.play().catch(() => {});
         }
 
