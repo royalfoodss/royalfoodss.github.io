@@ -434,36 +434,6 @@ h2 {
 
     overflow:hidden;
 }
-
-/* Golden Reflection */
-
-.product-card::before,
-.team-card::before,
-.contact-card::before,
-.card::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-150%;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 30%,
-            rgba(255,215,0,.18) 48%,
-            rgba(255,255,255,.45) 50%,
-            rgba(255,215,0,.18) 52%,
-            transparent 70%
-        );
-
-    transform: var(--shine-transform, translateX(-120%) rotate(18deg));
-
-    transition:transform .15s linear;
-
-    pointer-events:none;
-}
     /* ==========================
    Royal Cursor Glow
 ========================== */
