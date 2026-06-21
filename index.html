@@ -43,10 +43,11 @@
     /* Hide scrollbar but keep scrolling */
 
 html {
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* IE and Edge */
-
+    background: #000;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     scroll-behavior: smooth;
+}
 }
 html::-webkit-scrollbar {
     display: none;              /* Chrome, Safari, Opera */
@@ -64,7 +65,7 @@ body.lock-scroll {
 body {
     margin: 0;
     font-family: 'Oswald', sans-serif;
-    background:transparent;
+    background:#000;
     color: white;
     line-height: 1.6;
     overflow-x: hidden;
@@ -417,31 +418,6 @@ h2 {
 }
 
 
-    /* ==========================
-   Gravity Canvas
-========================== */
-nav,
-.hero,
-section,
-footer,
-#royalEntrance{
-
-    position:relative;
-
-    z-index:2;
-
-}
-#gravityCanvas{
-    position: fixed;
-    inset: 0;
-
-    width:100%;
-    height:100%;
-
-    pointer-events:none;
-
-    z-index:0;
-}
 /* ==========================
    Premium 3D Cards
 ========================== */
