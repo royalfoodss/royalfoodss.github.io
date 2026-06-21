@@ -26,20 +26,25 @@ void main(){
 
     vec2 mouse = uMouse;
 
-    float dist = distance(uv,mouse);
+    float d = distance(uv,mouse);
 
-    float glow = smoothstep(0.40,0.0,dist);
+    float glow = smoothstep(0.45,0.0,d);
+
+    float wave =
+        sin((uv.x*12.0)+uTime*0.8) *
+        sin((uv.y*12.0)-uTime*0.6);
+
+    wave *= 0.03;
+
+    uv += wave;
 
     vec3 color = vec3(0.0);
 
-    color += vec3(
-        1.0,
-        0.82,
-        0.12
-    ) * glow * 0.15;
+    color += vec3(1.0,0.82,0.15) * glow * 0.18;
+
+    color += vec3(1.0,0.75,0.10) * wave * 0.2;
 
     gl_FragColor = vec4(color,1.0);
 
 }
-
 `;
