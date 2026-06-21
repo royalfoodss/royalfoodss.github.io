@@ -1,19 +1,51 @@
 export const vertexShader = `
 
+uniform vec2 uMouse;
+uniform float uTime;
+
 varying vec2 vUv;
+varying float vGravity;
 
 void main(){
 
     vUv = uv;
 
-    gl_Position = vec4(position,1.0);
+    vec3 pos = position;
+
+    // Convert mouse from 0-1 to -1 to 1
+    vec2 mouse = uMouse * 2.0 - 1.0;
+
+    vec2 diff = pos.xy - mouse;
+
+    float dist = length(diff);
+
+    // Gravity
+    float gravity = smoothstep(0.45,0.0,dist);
+
+    gravity = pow(gravity,2.2);
+
+    // Sink
+    pos.z -= gravity * 0.35;
+
+    // Ripple
+    float ripple =
+        sin(dist * 45.0 - uTime * 8.0)
+        * gravity
+        * 0.025;
+
+    pos.z += ripple;
+
+    vGravity = gravity;
+
+    gl_Position =
+        projectionMatrix *
+        modelViewMatrix *
+        vec4(pos,1.0);
 
 }
-
 `;
-
 export const fragmentShader = `
-
+varying float vGravity;
 uniform vec2 uMouse;
 uniform float uTime;
 
@@ -94,9 +126,7 @@ uv = center + p;
     // Dark Pit
     //------------------------------
 
-   float pit = pow(smoothstep(.35,.0,dist),3.0);
-
-color *= 1.0 - pit;
+  color *= 1.0 - vGravity;
     //------------------------------
     // Small Cursor Glow
     //------------------------------
