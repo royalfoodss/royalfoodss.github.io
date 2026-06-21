@@ -85,20 +85,13 @@ void main(){
 
     float glow = smoothstep(.40,.0,r);
 
-    //-----------------------------
-    // Gold Ring
-    //-----------------------------
-
-    float ring =
-        smoothstep(.20,.18,r)
-      - smoothstep(.18,.16,r);
+    
 
     //-----------------------------
     // Dark Core
     //-----------------------------
 
-    float core =
-        smoothstep(.06,.03,r);
+    float pit = exp(-r * 18.0);
 
     //-----------------------------
     // Final Color
@@ -117,15 +110,10 @@ void main(){
              * n
              * 0.45;
 
-    // bright ring
-
-    color += vec3(1.0,0.92,0.55)
-             * ring
-             * 1.2;
-
+  
     // black hole center
 
-    color *= (1.0-core);
+color -= vec3(pit * 0.9);
 
     gl_FragColor = vec4(color,1.0);
 
