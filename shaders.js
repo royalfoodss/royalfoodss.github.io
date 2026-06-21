@@ -30,50 +30,104 @@ float noise(vec2 p){
     vec2 u=f*f*(3.0-2.0*f);
 
     return mix(
-        mix(hash(i),hash(i+vec2(1.,0.)),u.x),
-        mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),u.x),
+        mix(hash(i),hash(i+vec2(1.0,0.0)),u.x),
+        mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0,1.0)),u.x),
         u.y
     );
 }
 
 void main(){
 
-    vec2 uv=vUv;
+    vec2 uv = vUv;
 
-    vec2 center=uMouse;
+    vec2 center = uMouse;
 
-    vec2 p=uv-center;
+    vec2 p = uv - center;
 
-    float r=length(p);
+    float r = length(p);
 
-    float angle=atan(p.y,p.x);
+    float angle = atan(p.y,p.x);
 
+    //-----------------------------
+    // Gravity Distortion
+    //-----------------------------
+
+    float gravity = 0.15 * exp(-r*5.5);
+
+    p *= (1.0 - gravity);
+
+    //-----------------------------
     // Swirl
-    angle += (0.18/(r+0.15))*sin(uTime*0.8);
+    //-----------------------------
 
-    // Pull inward
-    r -= 0.06*exp(-r*6.0);
+    angle += gravity * 4.0;
 
-    vec2 warped=center+vec2(cos(angle),sin(angle))*r;
+    vec2 warped =
+        center +
+        vec2(cos(angle),sin(angle)) *
+        length(p);
 
-    float n=noise(warped*8.0+uTime*0.08);
+    //-----------------------------
+    // Liquid Noise
+    //-----------------------------
 
-    float pit=smoothstep(0.35,0.0,r);
+    float n = 0.0;
 
-    float ring=smoothstep(0.23,0.20,r);
+    n += noise(warped*6.0 + uTime*0.04);
+    n += noise(warped*12.0 - uTime*0.03)*0.5;
+    n += noise(warped*24.0 + uTime*0.02)*0.25;
 
-    vec3 color=vec3(0.0);
+    n /= 1.75;
 
-    // Moving gold texture
-    color+=vec3(0.04)*n;
+    //-----------------------------
+    // Glow
+    //-----------------------------
 
-    // Gold glow
-    color+=vec3(1.0,0.82,0.15)*pit*0.35;
+    float glow = smoothstep(.40,.0,r);
 
-    // Bright ring
-    color+=vec3(1.0,0.92,0.55)*ring*0.6;
+    //-----------------------------
+    // Gold Ring
+    //-----------------------------
 
-    gl_FragColor=vec4(color,1.0);
+    float ring =
+        smoothstep(.20,.18,r)
+      - smoothstep(.18,.16,r);
+
+    //-----------------------------
+    // Dark Core
+    //-----------------------------
+
+    float core =
+        smoothstep(.06,.03,r);
+
+    //-----------------------------
+    // Final Color
+    //-----------------------------
+
+    vec3 color = vec3(0.0);
+
+    // subtle moving background
+
+    color += vec3(0.02) * n;
+
+    // flowing gold
+
+    color += vec3(1.0,0.80,0.12)
+             * glow
+             * n
+             * 0.45;
+
+    // bright ring
+
+    color += vec3(1.0,0.92,0.55)
+             * ring
+             * 1.2;
+
+    // black hole center
+
+    color *= (1.0-core);
+
+    gl_FragColor = vec4(color,1.0);
 
 }
 `;
