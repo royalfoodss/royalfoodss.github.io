@@ -89,7 +89,12 @@ window.addEventListener("mousemove",(e)=>{
    Test Plane
 ------------------------------ */
 
-const geometry = new THREE.PlaneGeometry(2,2);
+const geometry = new THREE.PlaneGeometry(
+    2,
+    2,
+    250,
+    250
+);
 
 const uniforms = {
 
