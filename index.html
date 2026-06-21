@@ -446,6 +446,28 @@ h2 {
         rgba(255,215,0,.28) 30%,
         rgba(255,215,0,.12) 55%,
         rgba(255,215,0,0) 75%);
+    
+}
+    .gold-particle{
+    position:fixed;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:9997;
+
+    background:gold;
+
+    box-shadow:
+        0 0 6px gold,
+        0 0 12px gold,
+        0 0 20px rgba(255,215,0,.8);
+
+    will-change:transform,opacity;
 }
     #spotlight{
     position: fixed;
@@ -1181,6 +1203,61 @@ document.addEventListener("mousemove",(e)=>{
     spotlight.style.setProperty("--y", e.clientY + "px");
 
 });
+    // =========================
+// GOLD DUST TRAIL
+// =========================
+
+let lastParticle = 0;
+
+document.addEventListener("mousemove", (e) => {
+
+    const now = Date.now();
+
+    if (now - lastParticle < 18) return;
+
+    lastParticle = now;
+
+    createParticle(e.clientX, e.clientY);
+
+});
+
+function createParticle(x, y){
+
+    const particle = document.createElement("div");
+
+    particle.className = "gold-particle";
+
+    document.body.appendChild(particle);
+
+    particle.style.left = x + "px";
+    particle.style.top = y + "px";
+
+    const angle = Math.random() * Math.PI * 2;
+
+    const distance = 15 + Math.random() * 30;
+
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+
+    gsap.to(particle,{
+        x: dx,
+        y: dy,
+
+        scale:0,
+
+        opacity:0,
+
+        duration:0.8,
+
+        ease:"power2.out",
+
+        onComplete(){
+            particle.remove();
+        }
+
+    });
+
+}
 
 </script>
 
