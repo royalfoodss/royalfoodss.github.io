@@ -769,7 +769,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </head>
 
 <body class="lock-scroll">
-    <canvas id="gravityCanvas"></canvas>
 
 <div id="royalEntrance">
 
@@ -1804,72 +1803,6 @@ cards.forEach(card=>{
 
     });
 
-    
-/* ==========================
-   Gravity Canvas
-========================== */
-
-const canvas = document.getElementById("gravityCanvas");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas(){
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-}
-
-resizeCanvas();
-
-window.addEventListener("resize", resizeCanvas);
-
-  let mouseX = canvas.width / 2;
-let mouseY = canvas.height / 2;
-
-document.addEventListener("mousemove", (e)=>{
-
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-});
-
-function draw(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    // Black background
-    ctx.fillStyle="#000";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    // Gravity glow
-    const gradient = ctx.createRadialGradient(
-
-        mouseX,
-        mouseY,
-        20,
-
-        mouseX,
-        mouseY,
-        280
-
-    );
-
-    gradient.addColorStop(0,"rgba(255,215,0,0.18)");
-    gradient.addColorStop(.25,"rgba(255,215,0,0.10)");
-    gradient.addColorStop(.6,"rgba(255,215,0,0.04)");
-    gradient.addColorStop(1,"rgba(255,215,0,0)");
-
-    ctx.fillStyle = gradient;
-
-    ctx.beginPath();
-    ctx.arc(mouseX,mouseY,280,0,Math.PI*2);
-    ctx.fill();
-
-    requestAnimationFrame(draw);
-
-}
-
-draw();
 });
     
 </script>
