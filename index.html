@@ -63,8 +63,8 @@ body.lock-scroll {
 }
 body {
     margin: 0;
-     font-family: 'Oswald', sans-serif;
-    background: #000;
+    font-family: 'Oswald', sans-serif;
+    background:transparent;
     color: white;
     line-height: 1.6;
     overflow-x: hidden;
@@ -420,21 +420,27 @@ h2 {
     /* ==========================
    Gravity Canvas
 ========================== */
+nav,
+.hero,
+section,
+footer,
+#royalEntrance{
 
+    position:relative;
+
+    z-index:2;
+
+}
 #gravityCanvas{
-
-    position:fixed;
-
-    left:0;
-    top:0;
+    position: fixed;
+    inset: 0;
 
     width:100%;
     height:100%;
 
-    z-index:-2;
-
     pointer-events:none;
 
+    z-index:0;
 }
 /* ==========================
    Premium 3D Cards
@@ -1820,8 +1826,18 @@ resizeCanvas();
 
 window.addEventListener("resize", resizeCanvas);
 
-    ctx.fillStyle = "red";
-ctx.fillRect(100,100,200,200);
+  function draw(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="#000";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    requestAnimationFrame(draw);
+
+}
+
+draw();
     
 </script>
 
