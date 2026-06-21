@@ -19,95 +19,93 @@ uniform float uTime;
 
 varying vec2 vUv;
 
-float random(vec2 st){
-    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453);
-}
+//------------------------------
+// Grid
+//------------------------------
 
-float noise(vec2 st){
+float grid(vec2 uv,float size,float width){
 
-    vec2 i=floor(st);
-    vec2 f=fract(st);
+    vec2 g=abs(fract(uv*size)-0.5);
 
-    float a=random(i);
-    float b=random(i+vec2(1.0,0.0));
-    float c=random(i+vec2(0.0,1.0));
-    float d=random(i+vec2(1.0,1.0));
+    float line=min(g.x,g.y);
 
-    vec2 u=f*f*(3.0-2.0*f);
+    return smoothstep(width,0.0,line);
 
-    return mix(a,b,u.x)
-         + (c-a)*u.y*(1.0-u.x)
-         + (d-b)*u.x*u.y;
 }
 
 void main(){
 
     vec2 uv=vUv;
 
-    //--------------------------
-    // Cursor
-    //--------------------------
-
     vec2 center=uMouse;
 
-    vec2 dir=center-uv;
+    //------------------------------
+    // Gravity
+    //------------------------------
 
-    float dist=length(dir);
+    vec2 dir = center - uv;
 
-    //--------------------------
-    // Gravity Strength
-    //--------------------------
+float dist = length(dir);
 
-    float gravity=smoothstep(.45,.0,dist);
+// Strong gravity only near cursor
+float gravity = smoothstep(0.45,0.0,dist);
 
-    //--------------------------
-    // Pull the background
-    //--------------------------
+// Falloff curve
+gravity = pow(gravity,2.2);
 
-    uv+=normalize(dir)*gravity*0.06;
+// Pull inward
+uv += normalize(dir) * gravity * 0.12;
 
-    //--------------------------
-    // Subtle swirl
-    //--------------------------
+// Sink effect
+uv.y += gravity * gravity * 0.05;
 
-    float angle=gravity*0.8;
+    //------------------------------
+    // Swirl
+    //------------------------------
 
-    float s=sin(angle);
-    float c=cos(angle);
+    vec2 p = uv - center;
 
-    uv-=center;
+float r = length(p);
 
-    uv=mat2(c,-s,s,c)*uv;
+float theta = atan(p.y,p.x);
 
-    uv+=center;
+// Swirl stronger near center
+theta += gravity * 1.6;
 
-    //--------------------------
-    // Marble Noise
-    //--------------------------
+p = vec2(cos(theta), sin(theta)) * r;
 
-    float n=0.0;
+uv = center + p;
 
-    n+=noise(uv*4.0+uTime*0.02);
-    n+=noise(uv*8.0-uTime*0.01)*0.5;
-    n+=noise(uv*16.0)*0.25;
+    //------------------------------
+    // Perspective Grid
+    //------------------------------
 
-    n/=1.75;
+    float g1=grid(uv,25.0,.018);
 
-    //--------------------------
-    // Almost black
-    //--------------------------
+    //------------------------------
+    // Background
+    //------------------------------
 
     vec3 color=vec3(0.0);
 
-    color+=vec3(n*0.025);
+    color+=vec3(.08)*g1;
 
-    //--------------------------
-    // Dark pit
-    //--------------------------
+    //------------------------------
+    // Dark Pit
+    //------------------------------
 
-    float pit=exp(-dist*22.0);
+   float pit = pow(smoothstep(.35,.0,dist),3.0);
 
-    color-=pit*0.18;
+color *= 1.0 - pit;
+    //------------------------------
+    // Small Cursor Glow
+    //------------------------------
+
+    color+=vec3(
+        1.0,
+        .82,
+        .12
+    )*pit*.08;
 
     gl_FragColor=vec4(color,1.0);
 
