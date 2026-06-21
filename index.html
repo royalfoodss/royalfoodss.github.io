@@ -1801,6 +1801,28 @@ cards.forEach(card=>{
 
 });
 
+    
+/* ==========================
+   Gravity Canvas
+========================== */
+
+const canvas = document.getElementById("gravityCanvas");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize", resizeCanvas);
+
+    ctx.fillStyle = "red";
+ctx.fillRect(100,100,200,200);
+    
 </script>
 
 
