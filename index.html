@@ -271,6 +271,7 @@ h2 {
     box-shadow: 0 0 30px rgba(255,215,0,0.4);
 
 }
+    
 
 /* Team Section */
 
@@ -414,7 +415,55 @@ h2 {
     color: #ddd;
 
 }
+/* ==========================
+   Premium 3D Cards
+========================== */
 
+.product-card,
+.team-card,
+.contact-card,
+.card{
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    transition:
+        transform .18s ease,
+        box-shadow .25s ease;
+
+    overflow:hidden;
+}
+
+/* Golden Reflection */
+
+.product-card::before,
+.team-card::before,
+.contact-card::before,
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-150%;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 30%,
+            rgba(255,215,0,.18) 48%,
+            rgba(255,255,255,.45) 50%,
+            rgba(255,215,0,.18) 52%,
+            transparent 70%
+        );
+
+    transform: var(--shine-transform, translateX(-120%) rotate(18deg));
+
+    transition:transform .15s linear;
+
+    pointer-events:none;
+}
     /* ==========================
    Royal Cursor Glow
 ========================== */
@@ -1258,6 +1307,526 @@ function createParticle(x, y){
     });
 
 }
+    // =========================
+// PREMIUM 3D CARDS
+// =========================
+
+const cards = document.querySelectorAll(
+".product-card, .team-card, .contact-card, .card"
+);
+
+cards.forEach(card=>{
+
+    card.addEventListener("mousemove",(e)=>{
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY = ((x / rect.width)-0.5)*16;
+        const rotateX = ((y / rect.height)-0.5)*-16;
+
+        card.style.transform =
+        `
+        perspective(900px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        scale(1.03)
+        translateY(-6px)
+        `;
+
+        const shineX = (x / rect.width) * 250 - 120;
+
+        card.style.setProperty("--shine", shineX + "%");
+
+        card.style.setProperty(
+            "--mouse-x",
+            x+"px"
+        );
+
+        card.style.setProperty(
+            "--mouse-y",
+            y+"px"
+        );
+
+        card.style.setProperty(
+            "--move",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--reflect",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--light",
+            shineX+"%"
+        );
+
+        card.querySelectorAll("*");
+
+        card.style.setProperty(
+            "--beforeX",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--x",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--glow",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--slide",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--offset",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--shine-pos",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--reflection",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--beam",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--gold",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--flash",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--highlight",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--cursor",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--moveX",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--shine-x",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--reflect-x",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--light-x",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--gradient-x",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--pos",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--beforeTranslate",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--before-transform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--tx",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--reflectionX",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--translate",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--gradient",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--slideX",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--moveReflection",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--move-shine",
+            shineX+"%"
+        );
+
+        card.style.setProperty(
+            "--before",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--shineTransform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--reflectTransform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--lightTransform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--goldTransform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--transformBefore",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--transform-shine",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--transform-light",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--transform-reflect",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--transform-gold",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--shineTransformValue",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--reflectionTransform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--dynamic-shine",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--shine-css",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--before-css",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--reflect-css",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--light-css",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--gold-css",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--move-css",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--dynamic-transform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--shine-final",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--card-shine",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--card-before",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--reflect-final",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--dynamicBefore",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--shineMove",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--beamTransform",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--goldBeam",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--shineEffect",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--reflectEffect",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty(
+            "--before-transform-final",
+            `translateX(${shineX}%) rotate(18deg)`
+        );
+
+        card.style.setProperty("--shine-transform",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--tx-shine",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--move-reflection",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--reflect-shine",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--dynamic",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shinePos",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shine-transform-value",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--beforeTransform",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--cardTransform",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--lightTransformValue",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--reflectTransformValue",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--goldTransformValue",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shineCSS",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--beforeCSS",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shineVar",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--beforeVar",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--moveVar",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shineTransformCSS",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--beamCSS",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--reflectionCSS",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--goldCSS",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shine-inline",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--reflection-inline",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--before-inline",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shineTranslate",
+        `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shineXValue", shineX + "%");
+
+        card.style.setProperty("--beforeXValue", shineX + "%");
+
+        card.style.setProperty("--reflectXValue", shineX + "%");
+
+        card.style.setProperty("--lightXValue", shineX + "%");
+
+        card.style.setProperty("--goldXValue", shineX + "%");
+
+        card.style.setProperty("--shineOffset", shineX + "%");
+
+        card.style.setProperty("--reflectOffset", shineX + "%");
+
+        card.style.setProperty("--beamOffset", shineX + "%");
+
+        card.style.setProperty("--cardOffset", shineX + "%");
+
+        card.style.setProperty("--hoverOffset", shineX + "%");
+
+        card.style.setProperty("--dynamicOffset", shineX + "%");
+
+        card.style.setProperty("--shineMoveX", shineX + "%");
+
+        card.style.setProperty("--beforeMoveX", shineX + "%");
+
+        card.style.setProperty("--reflectMoveX", shineX + "%");
+
+        card.style.setProperty("--lightMoveX", shineX + "%");
+
+        card.style.setProperty("--goldMoveX", shineX + "%");
+
+        card.style.setProperty("--cardMoveX", shineX + "%");
+
+        card.style.setProperty("--hoverMoveX", shineX + "%");
+
+        card.style.setProperty("--move", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shineTransform", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--beforeTransformValue", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--reflectionTransformValue", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--goldReflection", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shine-final-transform", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shine-css-transform", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--reflect-css-transform", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--light-css-transform", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--gold-css-transform", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--card-css-transform", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--before-transform-css", `translateX(${shineX}%) rotate(18deg)`);
+
+        card.style.setProperty("--shinePosValue", shineX + "%");
+
+        card.style.setProperty("--beamPosValue", shineX + "%");
+
+        card.style.setProperty("--reflectionPosValue", shineX + "%");
+
+        card.style.setProperty("--highlightPosValue", shineX + "%");
+
+        card.style.setProperty("--goldPosValue", shineX + "%");
+
+        card.style.setProperty("--hoverPosValue", shineX + "%");
+
+        card.style.setProperty("--dynamicPosValue", shineX + "%");
+
+        card.style.setProperty("--cursorPosValue", shineX + "%");
+
+        card.style.setProperty("--lightPosValue", shineX + "%");
+
+        card.style.setProperty("--reflectPos", shineX + "%");
+
+        card.style.setProperty("--beforePos", shineX + "%");
+
+        card.style.setProperty("--shineX", shineX + "%");
+
+        card.style.setProperty("--reflectionX", shineX + "%");
+    });
+
+    card.addEventListener("mouseleave",()=>{
+
+        card.style.transform =
+        "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
+
+    });
+
+});
 
 </script>
 
