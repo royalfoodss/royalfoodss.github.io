@@ -415,6 +415,46 @@ h2 {
 
 }
 
+    /* ==========================
+   Royal Cursor Glow
+========================== */
+
+#cursor-glow{
+    position: fixed;
+
+    width:250px;
+    height:250px;
+
+    left:0;
+    top:0;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    z-index:9999;
+
+    opacity:0;
+
+    transition:opacity .25s;
+
+    background:
+    radial-gradient(circle,
+        rgba(0,0,0,.55) 0%,
+        rgba(255,215,0,.28) 30%,
+        rgba(255,215,0,.12) 55%,
+        rgba(255,215,0,0) 75%);
+}
+
+/* Hide on phones */
+
+@media (pointer:coarse){
+    #cursor-glow{
+        display:none;
+    }
+}
 
     
   #royalEntrance {
@@ -674,6 +714,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </button>
 
 </div>
+    <div id="cursor-glow"></div>
     
    <audio id="backgroundMusic" loop>
     <source src="music.mp3" type="audio/mpeg">
@@ -1078,6 +1119,44 @@ gsap.ticker.add((time) => {
 });
 
 gsap.ticker.lagSmoothing(0);
+
+
+    const glow = document.getElementById("cursor-glow");
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+let currentX = mouseX;
+let currentY = mouseY;
+
+document.addEventListener("mousemove",(e)=>{
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    glow.style.opacity = 1;
+
+});
+
+document.addEventListener("mouseleave",()=>{
+
+    glow.style.opacity = 0;
+
+});
+
+function animateGlow(){
+
+    currentX += (mouseX-currentX)*0.12;
+    currentY += (mouseY-currentY)*0.12;
+
+    glow.style.left = currentX+"px";
+    glow.style.top = currentY+"px";
+
+    requestAnimationFrame(animateGlow);
+
+}
+
+animateGlow();
 
 </script>
 
