@@ -18,15 +18,19 @@ const scene = new THREE.Scene();
    Camera
 ------------------------------ */
 
-const camera = new THREE.OrthographicCamera(
-    -1,
-     1,
-     1,
-    -1,
-     0,
-     1
+const camera = new THREE.PerspectiveCamera(
+
+45,
+
+window.innerWidth / window.innerHeight,
+
+0.1,
+
+100
+
 );
 
+camera.position.z = 2.5;
 /* ------------------------------
    Renderer
 ------------------------------ */
@@ -72,19 +76,13 @@ window.addEventListener("resize",()=>{
 
     );
 
-});
-window.addEventListener("mousemove",(e)=>{
+    camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
 
-    uniforms.uMouse.value.set(
-
-        e.clientX/window.innerWidth,
-
-        1.0-e.clientY/window.innerHeight
-
-    );
+    camera.updateProjectionMatrix();
 
 });
-
 /* ------------------------------
    Test Plane
 ------------------------------ */
