@@ -1,5 +1,13 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.165/build/three.module.js";
 
+import {
+
+vertexShader,
+
+fragmentShader
+
+} from "./shaders.js";
+
 /* ------------------------------
    Scene
 ------------------------------ */
@@ -65,6 +73,17 @@ window.addEventListener("resize",()=>{
     );
 
 });
+window.addEventListener("mousemove",(e)=>{
+
+    uniforms.uMouse.value.set(
+
+        e.clientX/window.innerWidth,
+
+        1.0-e.clientY/window.innerHeight
+
+    );
+
+});
 
 /* ------------------------------
    Test Plane
@@ -72,12 +91,34 @@ window.addEventListener("resize",()=>{
 
 const geometry = new THREE.PlaneGeometry(2,2);
 
-const material = new THREE.MeshBasicMaterial({
+const uniforms = {
 
-    color:0x000000
+    uResolution:{
+        value:new THREE.Vector2(
+            window.innerWidth,
+            window.innerHeight
+        )
+    },
+
+    uMouse:{
+        value:new THREE.Vector2(.5,.5)
+    },
+
+    uTime:{
+        value:0
+    }
+
+};
+
+const material = new THREE.ShaderMaterial({
+
+    uniforms,
+
+    vertexShader,
+
+    fragmentShader
 
 });
-
 const plane = new THREE.Mesh(
 
     geometry,
@@ -96,7 +137,9 @@ function animate(){
 
     requestAnimationFrame(animate);
 
-    renderer.render(scene,camera);
+   uniforms.uTime.value += 0.01;
+
+renderer.render(scene,camera);
 
 }
 
