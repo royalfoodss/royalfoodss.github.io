@@ -15,7 +15,6 @@ void main(){
 export const fragmentShader = `
 
 uniform vec2 uMouse;
-uniform vec2 uResolution;
 uniform float uTime;
 
 varying vec2 vUv;
@@ -25,7 +24,6 @@ float hash(vec2 p){
 }
 
 float noise(vec2 p){
-
     vec2 i=floor(p);
     vec2 f=fract(p);
 
@@ -36,46 +34,44 @@ float noise(vec2 p){
         mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),u.x),
         u.y
     );
-
 }
 
 void main(){
 
     vec2 uv=vUv;
 
-    vec2 mouse=uMouse;
+    vec2 center=uMouse;
 
-    float d=distance(uv,mouse);
+    vec2 p=uv-center;
 
-    float pit=smoothstep(.45,.0,d);
+    float r=length(p);
 
-    vec2 dir=normalize(mouse-uv);
+    float angle=atan(p.y,p.x);
 
-    uv+=dir*pit*0.08;
+    // Swirl
+    angle += (0.18/(r+0.15))*sin(uTime*0.8);
 
-    float n=0.0;
+    // Pull inward
+    r -= 0.06*exp(-r*6.0);
 
-    n+=noise(uv*5.0+uTime*.05);
-    n+=noise(uv*10.0-uTime*.03)*0.5;
-    n+=noise(uv*20.0+uTime*.02)*0.25;
+    vec2 warped=center+vec2(cos(angle),sin(angle))*r;
 
-    n/=1.75;
+    float n=noise(warped*8.0+uTime*0.08);
+
+    float pit=smoothstep(0.35,0.0,r);
+
+    float ring=smoothstep(0.23,0.20,r);
 
     vec3 color=vec3(0.0);
 
-    color+=vec3(.03)*n;
+    // Moving gold texture
+    color+=vec3(0.04)*n;
 
-    color+=vec3(
-        1.0,
-        .82,
-        .15
-    )*pow(pit,2.0)*0.25;
+    // Gold glow
+    color+=vec3(1.0,0.82,0.15)*pit*0.35;
 
-    color+=vec3(
-        1.0,
-        .65,
-        .05
-    )*n*pit*0.18;
+    // Bright ring
+    color+=vec3(1.0,0.92,0.55)*ring*0.6;
 
     gl_FragColor=vec4(color,1.0);
 
