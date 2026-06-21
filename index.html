@@ -423,26 +423,16 @@ h2 {
 .team-card,
 .contact-card,
 .card{
+
     position:relative;
+
     transform-style:preserve-3d;
-    overflow:hidden;
 
     transition:
-        transform .28s cubic-bezier(.22,1,.36,1),
-        box-shadow .30s ease,
-        border-color .30s ease;
-}
+        transform .18s ease,
+        box-shadow .25s ease;
 
-.product-card:hover,
-.team-card:hover,
-.contact-card:hover,
-.card:hover{
-
-    box-shadow:
-        0 0 25px rgba(255,215,0,.30),
-        0 0 55px rgba(255,215,0,.15);
-
-    border-color:gold;
+    overflow:hidden;
 }
     /* ==========================
    Royal Cursor Glow
@@ -1209,39 +1199,10 @@ function animateGlow(){
 }
 
 animateGlow();
+   
+document.addEventListener("mousemove",(e)=>{
 
-const magneticCards = document.querySelectorAll(
-".product-card,.team-card,.contact-card,.card");
-
-magneticCards.forEach(card=>{
-
-    card.addEventListener("mousemove",(e)=>{
-
-        const rect = card.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const rotateY = (x - rect.width/2)/18;
-        const rotateX = -(y - rect.height/2)/18;
-
-        card.style.transform = `
-            perspective(900px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            translateY(-6px)
-            scale(1.02)
-        `;
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-
-        card.style.transform =
-        "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)";
-
-    });
- });
+});
     // =========================
 // GOLD DUST TRAIL
 // =========================
