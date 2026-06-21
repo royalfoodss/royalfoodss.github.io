@@ -19,103 +19,97 @@ uniform float uTime;
 
 varying vec2 vUv;
 
-float hash(vec2 p){
-    return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123);
+float random(vec2 st){
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453);
 }
 
-float noise(vec2 p){
-    vec2 i=floor(p);
-    vec2 f=fract(p);
+float noise(vec2 st){
+
+    vec2 i=floor(st);
+    vec2 f=fract(st);
+
+    float a=random(i);
+    float b=random(i+vec2(1.0,0.0));
+    float c=random(i+vec2(0.0,1.0));
+    float d=random(i+vec2(1.0,1.0));
 
     vec2 u=f*f*(3.0-2.0*f);
 
-    return mix(
-        mix(hash(i),hash(i+vec2(1.0,0.0)),u.x),
-        mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0,1.0)),u.x),
-        u.y
-    );
+    return mix(a,b,u.x)
+         + (c-a)*u.y*(1.0-u.x)
+         + (d-b)*u.x*u.y;
 }
 
 void main(){
 
-    vec2 uv = vUv;
+    vec2 uv=vUv;
 
-    vec2 center = uMouse;
+    //--------------------------
+    // Cursor
+    //--------------------------
 
-    vec2 p = uv - center;
+    vec2 center=uMouse;
 
-    float r = length(p);
+    vec2 dir=center-uv;
 
-    float angle = atan(p.y,p.x);
+    float dist=length(dir);
 
-    //-----------------------------
-    // Gravity Distortion
-    //-----------------------------
+    //--------------------------
+    // Gravity Strength
+    //--------------------------
 
-    float gravity = 0.15 * exp(-r*5.5);
+    float gravity=smoothstep(.45,.0,dist);
 
-    p *= (1.0 - gravity);
+    //--------------------------
+    // Pull the background
+    //--------------------------
 
-    //-----------------------------
-    // Swirl
-    //-----------------------------
+    uv+=normalize(dir)*gravity*0.06;
 
-    angle += gravity * 4.0;
+    //--------------------------
+    // Subtle swirl
+    //--------------------------
 
-    vec2 warped =
-        center +
-        vec2(cos(angle),sin(angle)) *
-        length(p);
+    float angle=gravity*0.8;
 
-    //-----------------------------
-    // Liquid Noise
-    //-----------------------------
+    float s=sin(angle);
+    float c=cos(angle);
 
-    float n = 0.0;
+    uv-=center;
 
-    n += noise(warped*6.0 + uTime*0.04);
-    n += noise(warped*12.0 - uTime*0.03)*0.5;
-    n += noise(warped*24.0 + uTime*0.02)*0.25;
+    uv=mat2(c,-s,s,c)*uv;
 
-    n /= 1.75;
+    uv+=center;
 
-    //-----------------------------
-    // Glow
-    //-----------------------------
+    //--------------------------
+    // Marble Noise
+    //--------------------------
 
-    float glow = smoothstep(.40,.0,r);
+    float n=0.0;
 
-    
+    n+=noise(uv*4.0+uTime*0.02);
+    n+=noise(uv*8.0-uTime*0.01)*0.5;
+    n+=noise(uv*16.0)*0.25;
 
-    //-----------------------------
-    // Dark Core
-    //-----------------------------
+    n/=1.75;
 
-    float pit = exp(-r * 18.0);
+    //--------------------------
+    // Almost black
+    //--------------------------
 
-    //-----------------------------
-    // Final Color
-    //-----------------------------
+    vec3 color=vec3(0.0);
 
-    vec3 color = vec3(0.0);
+    color+=vec3(n*0.025);
 
-    // subtle moving background
+    //--------------------------
+    // Dark pit
+    //--------------------------
 
-    color += vec3(0.02) * n;
+    float pit=exp(-dist*22.0);
 
-    // flowing gold
+    color-=pit*0.18;
 
-    color += vec3(1.0,0.80,0.12)
-             * glow
-             * n
-             * 0.45;
-
-  
-    // black hole center
-
-color -= vec3(pit * 0.9);
-
-    gl_FragColor = vec4(color,1.0);
+    gl_FragColor=vec4(color,1.0);
 
 }
 `;
