@@ -469,35 +469,33 @@ h2 {
 ========================== */
 
 #cursor-glow{
+    position: fixed;
 
-    position:fixed;
-    left:0;
-    top:0;
+    width: 50px;
+    height: 50px;
 
-    width:280px;
-    height:280px;
+    border-radius: 50%;
 
-    border-radius:50%;
+    pointer-events: none;
 
-    pointer-events:none;
+    transform: translate(-50%, -50%);
 
-    transform:translate(-50%,-50%);
+    left: 0;
+    top: 0;
 
-    z-index:9999;
+    z-index: 99999;
 
-    opacity:0;
+    opacity: 0;
 
-    transition:opacity .2s;
+    transition: opacity .15s;
 
-    background:radial-gradient(circle,
-        rgba(255,215,0,.28) 0%,
-        rgba(255,215,0,.15) 35%,
-        rgba(255,215,0,.05) 60%,
-        transparent 100%);
+    background: radial-gradient(circle,
+        rgba(255,215,0,0.95) 0%,
+        rgba(255,215,0,0.45) 40%,
+        rgba(255,215,0,0) 100%);
 
-    filter:blur(35px);
+    filter: blur(12px);
 
-    mix-blend-mode:normal;
 }
     .gold-particle{
     position:fixed;
