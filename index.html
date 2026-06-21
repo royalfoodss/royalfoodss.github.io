@@ -520,22 +520,7 @@ h2 {
 
     will-change:transform,opacity;
 }
-    #spotlight{
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9998;
-
-    background:
-    radial-gradient(
-        circle 180px at var(--x) var(--y),
-        transparent 0,
-        transparent 45%,
-        rgba(0,0,0,.45) 75%,
-        rgba(0,0,0,.75) 100%
-    );
-}
-
+    
 /* Hide on phones */
 
 @media (pointer:coarse){
@@ -802,7 +787,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </button>
 
 </div>
-<div id="spotlight"></div>
+
 <div id="cursor-glow"></div>
     
    <audio id="backgroundMusic" loop>
@@ -1246,12 +1231,8 @@ function animateGlow(){
 }
 
 animateGlow();
-    const spotlight = document.getElementById("spotlight");
-
+   
 document.addEventListener("mousemove",(e)=>{
-
-    spotlight.style.setProperty("--x", e.clientX + "px");
-    spotlight.style.setProperty("--y", e.clientY + "px");
 
 });
     // =========================
