@@ -20,31 +20,64 @@ uniform float uTime;
 
 varying vec2 vUv;
 
+float hash(vec2 p){
+    return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123);
+}
+
+float noise(vec2 p){
+
+    vec2 i=floor(p);
+    vec2 f=fract(p);
+
+    vec2 u=f*f*(3.0-2.0*f);
+
+    return mix(
+        mix(hash(i),hash(i+vec2(1.,0.)),u.x),
+        mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),u.x),
+        u.y
+    );
+
+}
+
 void main(){
 
-    vec2 uv = vUv;
+    vec2 uv=vUv;
 
-    vec2 mouse = uMouse;
+    vec2 mouse=uMouse;
 
-    float d = distance(uv,mouse);
+    float d=distance(uv,mouse);
 
-    float glow = smoothstep(0.45,0.0,d);
+    float pit=smoothstep(.45,.0,d);
 
-    float wave =
-        sin((uv.x*12.0)+uTime*0.8) *
-        sin((uv.y*12.0)-uTime*0.6);
+    vec2 dir=normalize(mouse-uv);
 
-    wave *= 0.03;
+    uv+=dir*pit*0.08;
 
-    uv += wave;
+    float n=0.0;
 
-    vec3 color = vec3(0.0);
+    n+=noise(uv*5.0+uTime*.05);
+    n+=noise(uv*10.0-uTime*.03)*0.5;
+    n+=noise(uv*20.0+uTime*.02)*0.25;
 
-    color += vec3(1.0,0.82,0.15) * glow * 0.18;
+    n/=1.75;
 
-    color += vec3(1.0,0.75,0.10) * wave * 0.2;
+    vec3 color=vec3(0.0);
 
-    gl_FragColor = vec4(color,1.0);
+    color+=vec3(.03)*n;
+
+    color+=vec3(
+        1.0,
+        .82,
+        .15
+    )*pow(pit,2.0)*0.25;
+
+    color+=vec3(
+        1.0,
+        .65,
+        .05
+    )*n*pit*0.18;
+
+    gl_FragColor=vec4(color,1.0);
 
 }
 `;
