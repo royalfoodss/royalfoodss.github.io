@@ -137,9 +137,9 @@ function animate(){
 
     requestAnimationFrame(animate);
 
-   uniforms.uTime.value += 0.01;
+   uniforms.uTime.value += 0.008;
 
-renderer.render(scene,camera);
+    renderer.render(scene,camera);
 
 }
 
