@@ -76,25 +76,15 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    border-bottom: 1px solid rgba(255,215,0,0.12);
-
+    background: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 20px 40px;
     box-sizing: border-box;
-
     z-index: 1000;
+}
 
-    transition: all .35s ease;
-}
-}
 
 nav .logo {
     color: gold;
@@ -782,10 +772,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <nav>
 
-    <div class="logo">
-        ROYALFOODSS
-    </div>
-
+   <a href="#top" class="logo">
+    ROYALFOODSS
+</a>
+<header class="hero" id="top">
    <ul>
     <li><a href="#products">Products</a></li>
     <li><a href="#about">About Us</a></li>
